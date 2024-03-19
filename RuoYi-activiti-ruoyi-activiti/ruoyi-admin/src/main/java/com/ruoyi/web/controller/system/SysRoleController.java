@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  * @author ruoyi
  */
-@RestController
+@Controller
 @RequestMapping("/system/role")
 public class SysRoleController extends BaseController
 {

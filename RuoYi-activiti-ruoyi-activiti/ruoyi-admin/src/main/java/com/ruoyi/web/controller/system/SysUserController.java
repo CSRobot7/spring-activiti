@@ -40,7 +40,7 @@ import com.ruoyi.system.service.ISysUserService;
  * 
  * @author ruoyi
  */
-@RestController
+@Controller
 @RequestMapping("/system/user")
 public class SysUserController extends BaseController
 {
@@ -304,6 +304,7 @@ public class SysUserController extends BaseController
     }
 
     @GetMapping("/queryAll")
+    @ResponseBody
     public List<SysUserPo> queryAll() {
         return userService.queryAll();
     }
