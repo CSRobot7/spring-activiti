@@ -82,6 +82,11 @@ public class TaskController extends BaseController {
         int total = condition.active().orderByTaskCreateTime().desc().list().size();
         int start = (param.getPageNum()-1) * param.getPageSize();
         List<Task> taskList = condition.active().orderByTaskCreateTime().desc().listPage(start, param.getPageSize());
+
+        String roleName = "";
+        final List<Task> list2 = taskService.createTaskQuery().taskCandidateGroup(roleName).list();
+
+
         List<TaskInfo> tasks = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         taskList.stream().forEach(a->{
@@ -98,6 +103,10 @@ public class TaskController extends BaseController {
             info.setStartTime(sdf.format(process.getStartTime()));
             info.setTaskId(a.getId());
             String formKey = formService.getTaskFormData(a.getId()).getFormKey();
+            //todo 可以根据模型分类确定跳转的自定义表单，先简单处理
+            if (a.getProcessDefinitionId().contains("leave")) {
+                formKey = "leaveapply/check";
+            }
             info.setFormKey(formKey);
             tasks.add(info);
         });

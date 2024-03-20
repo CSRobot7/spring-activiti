@@ -5,23 +5,18 @@ import java.util.Date;
 import java.util.List;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
-import com.ruoyi.system.domain.Leaveapply;
 import com.ruoyi.system.service.ISysUserService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.system.domain.Purchase;
 import com.ruoyi.system.service.IPurchaseService;
 import com.ruoyi.common.core.controller.BaseController;
@@ -100,7 +95,6 @@ public class PurchaseController extends BaseController
     /**
      * 新增保存采购
      */
-    @Log(title = "采购", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Purchase purchase)
@@ -119,7 +113,6 @@ public class PurchaseController extends BaseController
     /**
      * 删除采购
      */
-    @Log(title = "采购", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

@@ -1,13 +1,18 @@
 package com.ruoyi.web.controller.activiti;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.system.domain.Process;
 import com.ruoyi.system.service.ISysUserService;
+import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
@@ -18,8 +23,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.system.domain.Leaveapply;
 import com.ruoyi.system.service.ILeaveapplyService;
 import com.ruoyi.common.core.controller.BaseController;
@@ -37,8 +40,7 @@ import javax.annotation.Resource;
  */
 @Controller
 @RequestMapping("/leaveapply")
-public class LeaveapplyController extends BaseController
-{
+public class LeaveapplyController extends BaseController {
     private String prefix = "activiti/leaveapply";
 
     @Autowired
@@ -53,9 +55,11 @@ public class LeaveapplyController extends BaseController
     @Resource
     private TaskService taskService;
 
+    @Resource
+    private RepositoryService repositoryService;
+
     @GetMapping()
-    public String leaveapply()
-    {
+    public String leaveapply() {
         return prefix + "/leaveapply";
     }
 
@@ -64,8 +68,7 @@ public class LeaveapplyController extends BaseController
      * @return
      */
     @GetMapping("/deptleadercheck")
-    public String deptleadercheck(String taskid, ModelMap mmap)
-    {
+    public String deptleadercheck(String taskid, ModelMap mmap) {
         Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
         String processId = t.getProcessInstanceId();
         ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
@@ -81,13 +84,30 @@ public class LeaveapplyController extends BaseController
         return prefix + "/deptleadercheck";
     }
 
+    //通用的审批页面
+    @GetMapping("/check")
+    public String check(String taskid, ModelMap mmap) {
+        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String processId = t.getProcessInstanceId();
+        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        if (p != null) {
+            Leaveapply apply = leaveapplyService.selectLeaveapplyById(Long.parseLong(p.getBusinessKey()));
+            mmap.put("apply", apply);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            mmap.put("startTime", sdf.format(apply.getStartTime()));
+            mmap.put("endTime", sdf.format(apply.getEndTime()));
+            mmap.put("taskid", taskid);
+            mmap.put("userlist", userService.selectUserList(new SysUser()));
+        }
+        return prefix + "/check";
+    }
+
     /**
      * 人事审批
      * @return
      */
     @GetMapping("/hrcheck")
-    public String hrcheck(String taskid, ModelMap mmap)
-    {
+    public String hrcheck(String taskid, ModelMap mmap) {
         Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
         String processId = t.getProcessInstanceId();
         ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
@@ -107,8 +127,7 @@ public class LeaveapplyController extends BaseController
      * @return
      */
     @GetMapping("/destroyapply")
-    public String destroyapply(String taskid, ModelMap mmap)
-    {
+    public String destroyapply(String taskid, ModelMap mmap) {
         Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
         String processId = t.getProcessInstanceId();
         ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
@@ -185,7 +204,6 @@ public class LeaveapplyController extends BaseController
     /**
      * 导出请假列表
      */
-    @Log(title = "请假", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Leaveapply leaveapply)
@@ -202,22 +220,37 @@ public class LeaveapplyController extends BaseController
      * 新增请假
      */
     @GetMapping("/add")
-    public String add(ModelMap mmap)
-    {
+    public String add(ModelMap mmap) {
+        ProcessDefinitionQuery queryCondition = repositoryService.createProcessDefinitionQuery();
+        queryCondition.latestVersion();
+        queryCondition.active();
+        List<ProcessDefinition> pageList = queryCondition.orderByDeploymentId().desc().list();
+        List<Process> pdList = new ArrayList<Process>();
+        for (int i = 0; i < pageList.size(); i++) {
+            Process p = new Process();
+            p.setDeploymentId(pageList.get(i).getDeploymentId());
+            p.setId(pageList.get(i).getId());
+            p.setKey(pageList.get(i).getKey());
+            p.setName(pageList.get(i).getName());
+            p.setResourceName(pageList.get(i).getResourceName());
+            p.setDiagramresourceName(pageList.get(i).getDiagramResourceName());
+            p.setVersion(pageList.get(i).getVersion());
+            p.setSuspended(pageList.get(i).isSuspended());
+            pdList.add(p);
+        }
+
         SysUser user = getSysUser();
         mmap.put("user", user);
-        mmap.put("userlist", userService.selectUserList(new SysUser()));
+        mmap.put("pdList", pdList);
         return prefix + "/add";
     }
 
     /**
      * 发起请假流程
      */
-    @Log(title = "请假", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Leaveapply leaveapply)
-    {
+    public AjaxResult addSave(Leaveapply leaveapply) {
         leaveapply.setApplyTime(new Date());
         return toAjax(leaveapplyService.insertLeaveapply(leaveapply));
     }
@@ -232,7 +265,6 @@ public class LeaveapplyController extends BaseController
     /**
      * 删除请假
      */
-    @Log(title = "请假", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

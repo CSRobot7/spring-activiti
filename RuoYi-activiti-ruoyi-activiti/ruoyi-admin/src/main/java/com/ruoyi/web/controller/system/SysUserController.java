@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -25,7 +23,6 @@ import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -75,7 +72,6 @@ public class SysUserController extends BaseController
         return getDataTable(list);
     }
 
-    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:user:export")
     @PostMapping("/export")
     @ResponseBody
@@ -86,7 +82,6 @@ public class SysUserController extends BaseController
         return util.exportExcel(list, "用户数据");
     }
 
-    @Log(title = "用户管理", businessType = BusinessType.IMPORT)
     @RequiresPermissions("system:user:import")
     @PostMapping("/importData")
     @ResponseBody
@@ -122,7 +117,6 @@ public class SysUserController extends BaseController
      * 新增保存用户
      */
     @RequiresPermissions("system:user:add")
-    @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(@Validated SysUser user)
@@ -166,7 +160,6 @@ public class SysUserController extends BaseController
      * 修改保存用户
      */
     @RequiresPermissions("system:user:edit")
-    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(@Validated SysUser user)
@@ -197,7 +190,6 @@ public class SysUserController extends BaseController
     }
 
     @RequiresPermissions("system:user:resetPwd")
-    @Log(title = "重置密码", businessType = BusinessType.UPDATE)
     @PostMapping("/resetPwd")
     @ResponseBody
     public AjaxResult resetPwdSave(SysUser user)
@@ -235,7 +227,6 @@ public class SysUserController extends BaseController
      * 用户授权角色
      */
     @RequiresPermissions("system:user:edit")
-    @Log(title = "用户管理", businessType = BusinessType.GRANT)
     @PostMapping("/authRole/insertAuthRole")
     @ResponseBody
     public AjaxResult insertAuthRole(Long userId, Long[] roleIds)
@@ -247,7 +238,6 @@ public class SysUserController extends BaseController
     }
 
     @RequiresPermissions("system:user:remove")
-    @Log(title = "用户管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
@@ -292,7 +282,6 @@ public class SysUserController extends BaseController
     /**
      * 用户状态修改
      */
-    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:user:edit")
     @PostMapping("/changeStatus")
     @ResponseBody

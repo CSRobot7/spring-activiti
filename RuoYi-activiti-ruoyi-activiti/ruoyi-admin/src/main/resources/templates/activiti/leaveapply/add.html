@@ -50,10 +50,10 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-xs-3 control-label">部门领导：</label>
+            <label class="col-xs-3 control-label">流程实例：</label>
             <div class="col-xs-8">
-                <select id="post" class="form-control" name="deptleader">
-                    <option th:each="ul:${userlist}" th:value="${ul.loginName}" th:text="${ul.userName}" th:disabled="${ul.status == '1'}"></option>
+                <select id="post" class="form-control" name="modelKey">
+                    <option th:each="ul:${pdList}" th:value="${ul.key}" th:text="${ul.name}" th:disabled="${ul.suspended == true}"></option>
                 </select>
             </div>
         </div>

@@ -11,20 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.page.TableDataInfo;
-import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.shiro.util.AuthorizationUtils;
 import com.ruoyi.system.domain.SysUserRole;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 角色信息
@@ -68,7 +65,6 @@ public class SysRoleController extends BaseController
         return roleService.selectRoleAll();
     }
 
-    @Log(title = "角色管理", businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:role:export")
     @PostMapping("/export")
     @ResponseBody
@@ -92,7 +88,6 @@ public class SysRoleController extends BaseController
      * 新增保存角色
      */
     @RequiresPermissions("system:role:add")
-    @Log(title = "角色管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(@Validated SysRole role)
@@ -127,7 +122,6 @@ public class SysRoleController extends BaseController
      * 修改保存角色
      */
     @RequiresPermissions("system:role:edit")
-    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(@Validated SysRole role)
@@ -161,7 +155,6 @@ public class SysRoleController extends BaseController
      * 保存角色分配数据权限
      */
     @RequiresPermissions("system:role:edit")
-    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PostMapping("/authDataScope")
     @ResponseBody
     public AjaxResult authDataScopeSave(SysRole role)
@@ -178,7 +171,6 @@ public class SysRoleController extends BaseController
     }
 
     @RequiresPermissions("system:role:remove")
-    @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
@@ -218,7 +210,6 @@ public class SysRoleController extends BaseController
     /**
      * 角色状态修改
      */
-    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:role:edit")
     @PostMapping("/changeStatus")
     @ResponseBody
@@ -257,7 +248,6 @@ public class SysRoleController extends BaseController
      * 取消授权
      */
     @RequiresPermissions("system:role:edit")
-    @Log(title = "角色管理", businessType = BusinessType.GRANT)
     @PostMapping("/authUser/cancel")
     @ResponseBody
     public AjaxResult cancelAuthUser(SysUserRole userRole)
@@ -269,7 +259,6 @@ public class SysRoleController extends BaseController
      * 批量取消授权
      */
     @RequiresPermissions("system:role:edit")
-    @Log(title = "角色管理", businessType = BusinessType.GRANT)
     @PostMapping("/authUser/cancelAll")
     @ResponseBody
     public AjaxResult cancelAuthUserAll(Long roleId, String userIds)
@@ -304,7 +293,6 @@ public class SysRoleController extends BaseController
      * 批量选择用户授权
      */
     @RequiresPermissions("system:role:edit")
-    @Log(title = "角色管理", businessType = BusinessType.GRANT)
     @PostMapping("/authUser/selectAll")
     @ResponseBody
     public AjaxResult selectAuthUserAll(Long roleId, String userIds)

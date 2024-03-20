@@ -45,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="applyTime != null">apply_time,</if>
             <if test="realityStartTime != null">reality_start_time,</if>
             <if test="realityEndTime != null">reality_end_time,</if>
+            <if test="modelKey != null">model_key,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">#{userId},</if>
@@ -55,6 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="applyTime != null">#{applyTime},</if>
             <if test="realityStartTime != null">#{realityStartTime},</if>
             <if test="realityEndTime != null">#{realityEndTime},</if>
+            <if test="modelKey != null">#{modelKey},</if>
          </trim>
     </insert>
 

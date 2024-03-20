@@ -30,8 +30,7 @@ import javax.annotation.Resource;
  */
 @Service
 @Transactional
-public class LeaveapplyServiceImpl implements ILeaveapplyService 
-{
+public class LeaveapplyServiceImpl implements ILeaveapplyService {
     @Resource
     private LeaveapplyMapper leaveapplyMapper;
 
@@ -54,8 +53,7 @@ public class LeaveapplyServiceImpl implements ILeaveapplyService
      * @return 请假
      */
     @Override
-    public Leaveapply selectLeaveapplyById(Long id)
-    {
+    public Leaveapply selectLeaveapplyById(Long id) {
         return leaveapplyMapper.selectLeaveapplyById(id);
     }
 
@@ -66,8 +64,7 @@ public class LeaveapplyServiceImpl implements ILeaveapplyService
      * @return 请假
      */
     @Override
-    public List<Leaveapply> selectLeaveapplyList(Leaveapply leaveapply)
-    {
+    public List<Leaveapply> selectLeaveapplyList(Leaveapply leaveapply) {
         return leaveapplyMapper.selectLeaveapplyList(leaveapply);
     }
 
@@ -85,11 +82,11 @@ public class LeaveapplyServiceImpl implements ILeaveapplyService
         identityService.setAuthenticatedUserId(leaveapply.getUserId());
         HashMap<String, Object> variables = new HashMap<>();
         variables.put("applyuserid", leaveapply.getUserId());
-        variables.put("deptleader", leaveapply.getDeptleader());
-        runtimeService.startProcessInstanceByKey("leave", String.valueOf(leaveapply.getId()), variables);
+//        variables.put("deptleader", leaveapply.getDeptleader());
+        runtimeService.startProcessInstanceByKey(leaveapply.getModelKey(), String.valueOf(leaveapply.getId()), variables);
         // 自动完成第一个任务
-        Task autoTask = taskService.createTaskQuery().processDefinitionKey("leave").processInstanceBusinessKey(String.valueOf(leaveapply.getId())).singleResult();
-        taskService.complete(autoTask.getId());
+/*        Task autoTask = taskService.createTaskQuery().processDefinitionKey("leave").processInstanceBusinessKey(String.valueOf(leaveapply.getId())).singleResult();
+        taskService.complete(autoTask.getId());*/
         return rows;
     }
 

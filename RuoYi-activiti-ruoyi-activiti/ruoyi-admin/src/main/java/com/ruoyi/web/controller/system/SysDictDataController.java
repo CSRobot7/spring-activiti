@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.SysDictData;
 import com.ruoyi.common.core.page.TableDataInfo;
-import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.service.ISysDictDataService;
 
@@ -51,7 +49,6 @@ public class SysDictDataController extends BaseController
         return getDataTable(list);
     }
 
-    @Log(title = "字典数据", businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:dict:export")
     @PostMapping("/export")
     @ResponseBody
@@ -75,7 +72,6 @@ public class SysDictDataController extends BaseController
     /**
      * 新增保存字典类型
      */
-    @Log(title = "字典数据", businessType = BusinessType.INSERT)
     @RequiresPermissions("system:dict:add")
     @PostMapping("/add")
     @ResponseBody
@@ -99,7 +95,6 @@ public class SysDictDataController extends BaseController
     /**
      * 修改保存字典类型
      */
-    @Log(title = "字典数据", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:dict:edit")
     @PostMapping("/edit")
     @ResponseBody
@@ -109,7 +104,6 @@ public class SysDictDataController extends BaseController
         return toAjax(dictDataService.updateDictData(dict));
     }
 
-    @Log(title = "字典数据", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:dict:remove")
     @PostMapping("/remove")
     @ResponseBody

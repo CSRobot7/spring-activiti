@@ -61,7 +61,20 @@ public class Leaveapply extends BaseEntity
      **/
     private String deptleader;
 
-    public void setId(Long id) 
+    /**
+     * 流程模型key
+     */
+    private String modelKey;
+
+    public String getModelKey() {
+        return modelKey;
+    }
+
+    public void setModelKey(String modelKey) {
+        this.modelKey = modelKey;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
