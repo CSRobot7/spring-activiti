@@ -3,14 +3,14 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi</artifactId>
+    <groupId>com.activiti</groupId>
+    <artifactId>spring-activiti</artifactId>
     <version>4.7.3</version>
 
     <description>管理系统</description>
     
     <properties>
-        <ruoyi.version>4.7.3</ruoyi.version>
+        <activiti.version>4.7.3</activiti.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -183,39 +183,49 @@
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-framework</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.activiti</groupId>
+                <artifactId>activiti-framework</artifactId>
+                <version>${activiti.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-system</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.activiti</groupId>
+                <artifactId>activiti-system</artifactId>
+                <version>${activiti.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.activiti</groupId>
+                <artifactId>activiti-common</artifactId>
+                <version>${activiti.version}</version>
             </dependency>
 
         </dependencies>
     </dependencyManagement>
 
     <modules>
-        <module>ruoyi-admin</module>
-        <module>ruoyi-framework</module>
-        <module>ruoyi-system</module>
-        <module>ruoyi-common</module>
+        <module>activiti-admin</module>
+        <module>activiti-framework</module>
+        <module>activiti-system</module>
+        <module>activiti-common</module>
     </modules>
     <packaging>pom</packaging>
 
 
     <dependencies>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.5.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.6</version>
+        </dependency>
     </dependencies>
 
     <build>
