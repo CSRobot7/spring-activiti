@@ -52,6 +52,7 @@ var KisBpmAssignmentPopupCtrl = [ '$scope', function($scope) {
 	        console.log(loginName);
 			$scope.assignment.assignee = loginName[0];
 			$scope.assignment.loginName1 = loginName;
+			$scope.$apply();
 	    }
 	});
 	jQuery.ajax({
@@ -68,6 +69,7 @@ var KisBpmAssignmentPopupCtrl = [ '$scope', function($scope) {
 	        // select3();
 			// $scope.assignment.assignee1 = roleName[0];
 			$scope.assignment.roleName1 = roleName;
+			$scope.$apply();
 	    }
 	});
 

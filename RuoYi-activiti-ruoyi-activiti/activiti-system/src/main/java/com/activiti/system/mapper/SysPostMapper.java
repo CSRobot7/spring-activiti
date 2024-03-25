@@ -6,7 +6,7 @@ import com.activiti.system.domain.SysPost;
 /**
  * 岗位信息 数据层
  * 
- * @author ruoyi
+ * 
  */
 public interface SysPostMapper
 {

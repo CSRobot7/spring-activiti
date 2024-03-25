@@ -322,7 +322,6 @@ $(function() {
     }
 
     function menuBlank() {
-    	// 新窗口打开外网以http://开头，如http://ruoyi.vip
     	var dataUrl = $(this).attr('href');
     	window.open(dataUrl);
     	return false;

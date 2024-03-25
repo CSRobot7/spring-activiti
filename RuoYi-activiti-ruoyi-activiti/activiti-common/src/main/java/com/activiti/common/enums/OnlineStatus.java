@@ -3,7 +3,7 @@ package com.activiti.common.enums;
 /**
  * 用户会话
  * 
- * @author ruoyi
+ * 
  */
 public enum OnlineStatus
 {

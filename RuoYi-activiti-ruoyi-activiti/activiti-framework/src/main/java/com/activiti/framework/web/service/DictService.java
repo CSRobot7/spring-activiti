@@ -8,9 +8,8 @@ import com.activiti.system.service.ISysDictDataService;
 import com.activiti.system.service.ISysDictTypeService;
 
 /**
- * RuoYi首创 html调用 thymeleaf 实现字典读取
+ *
  * 
- * @author ruoyi
  */
 @Service("dict")
 public class DictService

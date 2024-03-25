@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 用户表 数据层
  * 
- * @author ruoyi
+ *
  */
 @Mapper
 public interface SysUserMapperV2 extends BaseMapper<SysUserPo> {

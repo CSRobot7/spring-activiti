@@ -17,7 +17,7 @@ import java.util.Date;
 /**
  * 用户对象 sys_user
  * 
- * @author ruoyi
+ *
  */
 @TableName("sys_user")
 public class SysUserPo {

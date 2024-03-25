@@ -6,7 +6,7 @@ import com.activiti.system.domain.SysNotice;
 /**
  * 公告 数据层
  * 
- * @author ruoyi
+ *
  */
 public interface SysNoticeMapper
 {

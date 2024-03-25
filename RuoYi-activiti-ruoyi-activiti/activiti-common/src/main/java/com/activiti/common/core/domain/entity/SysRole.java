@@ -12,7 +12,7 @@ import com.activiti.common.core.domain.BaseEntity;
 /**
  * 角色表 sys_role
  * 
- * @author ruoyi
+ *
  */
 @TableName("sys_role")
 public class SysRole extends BaseEntity

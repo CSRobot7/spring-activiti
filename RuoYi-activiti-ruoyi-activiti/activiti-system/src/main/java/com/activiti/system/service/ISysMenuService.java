@@ -11,7 +11,7 @@ import com.activiti.common.core.domain.entity.SysUser;
 /**
  * 菜单 业务层
  * 
- * @author ruoyi
+ * 
  */
 public interface ISysMenuService {
     /**

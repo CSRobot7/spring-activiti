@@ -23,7 +23,7 @@ import com.activiti.framework.web.service.ConfigService;
 /**
  * 登录验证
  * 
- * @author ruoyi
+ *
  */
 @Controller
 public class SysLoginController extends BaseController

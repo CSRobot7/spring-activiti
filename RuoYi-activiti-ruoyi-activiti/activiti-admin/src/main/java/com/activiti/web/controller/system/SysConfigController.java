@@ -22,7 +22,7 @@ import com.activiti.system.service.ISysConfigService;
 /**
  * 参数配置 信息操作处理
  * 
- * @author ruoyi
+ *
  */
 @Controller
 @RequestMapping("/system/config")

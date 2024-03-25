@@ -14,7 +14,7 @@
     <link th:href="@{/css/animate.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/skins.css?v=20200902}" rel="stylesheet"/>
-    <link th:href="@{/ruoyi/css/ry-ui.css?v=4.7.3}" rel="stylesheet"/>
+    <link th:href="@{/project/css/ry-ui.css?v=4.7.3}" rel="stylesheet"/>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" th:classappend="${isMobile} ? 'canvas-menu'" style="overflow: hidden">
 <div id="wrapper">
@@ -26,7 +26,7 @@
         </div>
         <a th:href="@{/index}">
             <li class="logo hidden-xs">
-                <span class="logo-lg">RuoYi</span>
+                <span class="logo-lg">activiti</span>
             </li>
          </a>
         <div class="sidebar-collapse tab-content" id="side-menu">
@@ -244,7 +244,6 @@
 				</div>
                 <!-- 右侧栏 -->
                 <ul class="nav navbar-top-links navbar-right welcome-message">
-                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="开发文档" href="http://doc.ruoyi.vip/ruoyi" target="_blank"><i class="fa fa-question-circle"></i> 文档</a></li>
                     <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="锁定屏幕" href="#" id="lockScreen"><i class="fa fa-lock"></i> 锁屏</a></li>
 	                <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="全屏显示" href="#" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏</a></li>
                 
@@ -303,7 +302,7 @@
         </div>
         
         <div th:if="${footer}" class="footer">
-            <div class="pull-right">© [[${copyrightYear}]] RuoYi Copyright </div>
+            <div class="pull-right">© [[${copyrightYear}]] Copyright </div>
         </div>
     </div>
     <!--右侧部分结束-->
@@ -316,9 +315,9 @@
 <script th:src="@{/js/jquery.contextMenu.min.js}"></script>
 <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-<script th:src="@{/ruoyi/js/ry-ui.js?v=4.7.3}"></script>
-<script th:src="@{/ruoyi/js/common.js?v=4.7.3}"></script>
-<script th:src="@{/ruoyi/index.js?v=20201208}"></script>
+<script th:src="@{/project/js/ry-ui.js?v=4.7.3}"></script>
+<script th:src="@{/project/js/common.js?v=4.7.3}"></script>
+<script th:src="@{/project/index.js?v=20201208}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
 <script th:src="@{/js/resize-tabs.js}"></script>
 <script th:inline="javascript">

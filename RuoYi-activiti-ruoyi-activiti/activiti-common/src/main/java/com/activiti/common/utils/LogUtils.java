@@ -12,7 +12,7 @@ import com.activiti.common.json.JSON;
 /**
  * 处理并记录日志文件
  * 
- * @author ruoyi
+ *
  */
 public class LogUtils
 {
